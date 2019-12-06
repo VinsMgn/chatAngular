@@ -1,0 +1,11 @@
+.color {
+  background-color: black;
+  color: white;
+}
+div#menu {
+  display: flex;
+  flex-direction: column;
+  float: left;
+  width: 170px;
+  height: 585px;
+}

@@ -1,0 +1,29 @@
+<div class="container-fluid" *ngIf="isConnected === false">
+  <div class="row centerContent">
+    <div class="col-md-12">
+      <input type="text" [(ngModel)]="userName" id="pseudo" placeholder="Pseudo"/>
+      <button
+        class="btn btn-outline-primary"
+        (click)="connexion()"
+        type="button">
+        Connexion
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" *ngIf="isConnected === true">
+  <div class="row">
+    <app-menu></app-menu>
+    <div>
+      <p *ngFor="let message of messages">
+        <span>{{message.author}} a dit : </span>
+        <span>{{message.content}}</span>
+      </p>
+    </div>
+      <div class="col-md-9" id="contentSender">
+            <input type="text" placeholder="Ecrivez votre message" [(ngModel)]="content">
+            <button class="btn btn-outline-secondary" type="submit" (click)="sendMessages()">Envoyer</button>
+        </div>
+  </div>
+</div>

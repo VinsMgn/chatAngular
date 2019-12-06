@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatServiceService } from '../services/chat-service.service';
 import { Message } from '../interfaces/messages';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-display-component',
@@ -12,20 +13,21 @@ export class DisplayComponentComponent implements OnInit {
   userName: string;
   content: string;
   messages: Message[] = [];
+  
 
-  constructor(private chatService: ChatServiceService) { }
+  constructor(private chatService: ChatServiceService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    if (localStorage.getItem('connexion') === 'true'){
+    if (localStorage.getItem('connexion') === 'true') {
       this.isConnected = true
-    }else {
+    } else {
       this.isConnected = false;
     }
   }
 
   connexion(): void {
     this.isConnected = true;
-    this.userName === '' ? this.userName : 'Personne sans nom'; 
+    this.userName === '' ? this.userName : 'Personne sans nom';
     localStorage.setItem('pseudo', this.userName);
     localStorage.setItem('connexion', JSON.stringify(this.isConnected));
   }
@@ -38,10 +40,12 @@ export class DisplayComponentComponent implements OnInit {
   sendMessages(): void {
     this.chatService.sendMessage({
       content: this.content,
-      author: localStorage.getItem('pseudo')
-    }).subscribe( 
-      (message: Message) => { this.messages.push(message)
-    })
+      author: localStorage.getItem('pseudo'),
+    }).subscribe(
+      (message: Message) => {
+        this.messages.push(message)
+      })
+      this.content = '';
   }
 
 

@@ -5,6 +5,7 @@ import { DisplayComponentComponent } from './display/display-component.component
 
 const Approutes: Routes = [
   { path:  'login', component: DisplayComponentComponent},
+  { path: 'channels/:id', component: DisplayComponentComponent }
 ];
 
 @NgModule({
